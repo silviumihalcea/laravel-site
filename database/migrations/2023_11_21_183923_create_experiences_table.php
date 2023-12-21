@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_domains', function (Blueprint $table) {
+        Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->integer('min_experience_interval');
+            $table->integer('max_experience_interval');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_domains');
+        Schema::dropIfExists('experiences');
     }
 };

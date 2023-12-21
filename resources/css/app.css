@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-base {
+        display: inline-block;
+        margin: 0.5rem;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-blue {
+        @apply btn-base bg-blue-500 text-white hover:bg-blue-700 hover:text-white border border-blue-500;
+    }
+
+    .btn-green {
+        @apply btn-base bg-green-500 text-white hover:bg-green-700;
+    }
+
+    .btn-red {
+        @apply btn-base bg-red-500 text-white hover:bg-red-700;
+    }
+}
+.job-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #4a5568, #2d3748);
+    color: #eceff4;
+}
+
+.job-card:hover {
+    transform: scale(1.05);
+}
+
+.job-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.job-details {
+    padding: 15px;
+}
+
+h3 {
+    margin-top: 0;
+    color: white;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.employer-logo {
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    overflow: hidden;
+}

@@ -16,6 +16,21 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+         <!-- Type -->
+         <div>
+            <x-input-label for="type" :value="__('Type')" />
+            <select id="type" class="block mt-1 w-full" name="type" :value="old('type')" required autofocus autocomplete="type">
+                <option value="select_type" selected disabled>Select type</option>
+                    
+                        <option value="employer">Employer</option>
+                        <option value="employee">Employee</option>                      
+                         
+                       
+                </option>
+            </select>
+            <x-input-error :messages="$errors->get('type')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

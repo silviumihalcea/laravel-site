@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('examples', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->integer('employer_id');
-            $table->integer('domain_id');
-            $table->integer('experience_id');
-            $table->integer('work_preferences_id');
-            $table->integer('language_id');
+            $table->integer('price');
+            $table->enum('type', ['type1', 'type2']);
             $table->datetime('expired_at')->nullable();
-            $table->timestamps();           
+            $table->timestamps();
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('examples');
     }
 };
