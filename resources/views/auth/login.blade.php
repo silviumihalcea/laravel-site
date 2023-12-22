@@ -44,4 +44,10 @@
             </x-primary-button>
         </div>
     </form>
+    <div class="mt-6 flex flex-col items-center justify-center">
+        <p class="ms-2 text-sm text-gray-600 dark:text-gray-400">If you don't have an account please register now.</p>
+        <x-primary-button class="ms-3">
+            <a href='/register'>Create an account</a> 
+        </x-primary-button>              
+    </div>
 </x-guest-layout>

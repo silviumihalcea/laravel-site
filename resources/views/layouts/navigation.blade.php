@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
@@ -15,8 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    @auth
+                        @if(auth()->user()->type == 'admin')
                     <x-nav-link :href="route('admin_jobs')" :active="request()->routeIs('admin_jobs')">
                         {{ __('Admin Jobs') }}
+                    </x-nav-link>
+                        @endif
+                    @endauth
+                    <x-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                        {{ __('Jobs') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -75,8 +82,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
+            @auth
+                @if(auth()->user()->type == 'admin' || auth()->user()->type == 'employer')
             <x-responsive-nav-link :href="route('admin_jobs')" :active="request()->routeIs('admin_jobs')">
                 {{ __('Admin_jobs') }}
+            </x-responsive-nav-link>
+                @endif
+            @endauth
+            <x-responsive-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                {{ __('Jobs') }}
             </x-responsive-nav-link>
         </div>
 

@@ -24,8 +24,7 @@
                     
                         <option value="employer">Employer</option>
                         <option value="employee">Employee</option>                      
-                         
-                       
+                          
                 </option>
             </select>
             <x-input-error :messages="$errors->get('type')" class="mt-2" />
@@ -64,4 +63,10 @@
             </x-primary-button>
         </div>
     </form>
+    <div class="mt-6 flex flex-col items-center justify-center">
+        <p class="ms-2 text-sm text-gray-600 dark:text-gray-400">If you already have an account please log in.</p>
+        <x-primary-button class="ms-3">
+            <a href='/login'>Log in</a> 
+        </x-primary-button>              
+    </div>
 </x-guest-layout>

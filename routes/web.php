@@ -10,6 +10,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WorkPreferenceController;
+use App\Http\Controllers\WelcomeController;
 
 
 /*
@@ -77,6 +78,9 @@ Route::post('languages', [LanguageController::class, 'store'])->name('languages'
 // work_preferences route
 Route::get('work_preferences', [WorkPreferenceController::class, 'index'])->name('work_preferences');
 Route::post('work_preferences', [WorkPreferenceController::class, 'store'])->name('work_preferences');
+
+// welcome route
+Route::get('/', [WelcomeController::class, 'showWelcome']);
 
 
 

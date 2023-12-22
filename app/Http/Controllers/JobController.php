@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\Benefit;
@@ -13,6 +14,9 @@ use App\Models\Language;
 use App\Models\WorkPreference;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+
+
 
 
 class JobController extends Controller
@@ -64,11 +68,13 @@ class JobController extends Controller
         $experiences= Experience::all();
         $work_preferences = WorkPreference::all();
         $languages = Language::all();
+        
 
-       
-
-        $jobs = Job::with(['benefitJobs', 'employer', 'domain', 'experience', 'workPreference', 'language'])->get();
-
+        if(Auth::user() && Auth::user()->type === 'employer'){
+            $jobs = Job::where('employer_id', Auth::user()->id)->with(['benefitJobs', 'employer', 'domain', 'experience', 'workPreference', 'language'])->get();
+        }else{
+             $jobs = Job::with(['benefitJobs', 'employer', 'domain', 'experience', 'workPreference', 'language'])->get();
+        }
       
         return view('jobs', [
             'jobs' => $jobs,

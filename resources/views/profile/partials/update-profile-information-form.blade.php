@@ -46,6 +46,16 @@
                 </div>
             @endif
         </div>
+        
+        @auth
+        @if(auth()->user()->type == 'employer')
+        <div>
+            <x-input-label for="logo" :value="__('Logo')"/>
+            <input type="file" id="logo" name="employer_logo">
+            <x-input-error class="mt-2" :messages="$errors->get('logo')" />
+        </div>
+        @endif
+        @endauth
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
