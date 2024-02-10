@@ -18,6 +18,8 @@ class Job extends Model
         'work_preferences_id',
         'language_id',
         'expired_at',
+        'job',
+        'tag'
     ];
 
     protected $table = 'jobs';

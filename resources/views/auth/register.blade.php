@@ -19,7 +19,7 @@
          <!-- Type -->
          <div>
             <x-input-label for="type" :value="__('Type')" />
-            <select id="type" class="block mt-1 w-full" name="type" :value="old('type')" required autofocus autocomplete="type">
+            <select id="type" class="block mt-1 w-full border border-gray-700 rounded-md shadow-md bg-gray-800 text-white" name="type" :value="old('type')" required autofocus autocomplete="type">
                 <option value="select_type" selected disabled>Select type</option>
                     
                         <option value="employer">Employer</option>

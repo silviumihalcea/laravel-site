@@ -12,19 +12,47 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Home') }}
+               
+                    <!-- if no one is logged in -->
+                
+                    @guest
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Login') }}
                     </x-nav-link>
+                    @endguest
+                
+                    <!-- if someone is logged in -->
+                    <!-- admin -->
                     @auth
-                        @if(auth()->user()->type == 'admin')
+                    @if(auth()->user()->type == 'admin')
                     <x-nav-link :href="route('admin_jobs')" :active="request()->routeIs('admin_jobs')">
                         {{ __('Admin Jobs') }}
                     </x-nav-link>
-                        @endif
-                    @endauth
+                                            
                     <x-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
-                        {{ __('Jobs') }}
+                        {{ __('All Jobs') }}
                     </x-nav-link>
+
+                    <!-- employer -->
+                    @elseif(auth()->user()->type == 'employer')
+                    <x-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                        {{ __('My Jobs') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('candidates')" :active="request()->routeIs('candidates')">
+                        {{ __('My Candidates') }}
+                    </x-nav-link>
+                    
+                    <!-- employee -->
+                    @else
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('My applications') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                        {{ __(' All Jobs') }}
+                    </x-nav-link>
+                    @endif
+                    @endauth
                 </div>
             </div>
 
@@ -48,6 +76,38 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+
+                        <!-- if admin is logged in -->
+                        @if(auth()->user()->type == 'admin')
+                            <x-dropdown-link :href="route('admin_jobs')">        
+                            {{ __('Admin Jobs') }}
+                            </x-dropdown-link>
+
+                        <!-- if employer is logged in -->
+                        @elseif(auth()->user()->type == 'employer')
+                        <x-dropdown-link :href="route('jobs')">
+    
+                                {{ __('My jobs') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('candidates')">
+    
+                                {{ __('My candidates') }}
+                        </x-dropdown-link>
+
+                        
+
+                        <!-- if employee is logged in -->
+                        @else
+                        <x-dropdown-link :href="route('dashboard')">
+                                {{ __('My applications')}}
+                        </x-dropdown-link>   
+
+                        <x-dropdown-link :href="route('jobs')">
+                                {{ __('All jobs')}}
+                        </x-dropdown-link>   
+                            
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -79,20 +139,50 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Home') }}
-            </x-responsive-nav-link>
+           
+            <!-- if no one is logged in -->
+                
+            @guest
+                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    {{ __('Login') }}
+                </x-responsive-nav-link>
+            @endguest
+        
+            <!-- if someone is logged in -->
             @auth
-                @if(auth()->user()->type == 'admin' || auth()->user()->type == 'employer')
-            <x-responsive-nav-link :href="route('admin_jobs')" :active="request()->routeIs('admin_jobs')">
-                {{ __('Admin_jobs') }}
-            </x-responsive-nav-link>
-                @endif
+            <!-- if admin is logged in -->  
+            @if(auth()->user()->type == 'admin')
+                <x-responsive-nav-link :href="route('admin_jobs')" :active="request()->routeIs('admin_jobs')">
+                    {{ __('Admin Jobs') }}
+                </x-responsive-nav-link>
+                                        
+                <x-responsive-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                    {{ __('All Jobs') }}
+                </x-responsive-nav-link>
+
+            <!-- if employer is logged in -->
+            @elseif(auth()->user()->type == 'employer')
+                <x-responsive-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                    {{ __('My Jobs') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('candidates')" :active="request()->routeIs('candidates')">
+                    {{ __('My Candidates') }}
+                </x-responsive-nav-link>
+
+            <!-- if employee is logged in -->   
+            @else
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('My applications') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
+                    {{ __('All jobs') }}
+                </x-responsive-nav-link>
+            @endif
+
             @endauth
-            <x-responsive-nav-link :href="route('jobs')" :active="request()->routeIs('jobs')">
-                {{ __('Jobs') }}
-            </x-responsive-nav-link>
         </div>
+
 
         @auth
         <!-- Responsive Settings Options -->
@@ -106,6 +196,36 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+                
+                <!-- if admin is logged in -->
+                @if(auth()->user()->type == 'admin')
+                    <x-responsive-nav-link :href="route('admin_jobs')">        
+                        {{ __('Admin Jobs') }}
+                    </x-responsive-nav-linkk>
+
+                <!-- if employer is logged in -->
+                @elseif(auth()->user()->type == 'employer')
+                    <x-responsive-nav-link :href="route('jobs')">
+
+                            {{ __('My jobs') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('candidates')">
+
+                            {{ __('My Candidates') }}
+                    </x-responsive-nav-link>
+                
+                <!-- if employee is logged in -->
+                @else
+                    <x-responsive-nav-link :href="route('dashboard')">
+                            {{ __('My applications')}}
+                    </x-responsive-nav-link>   
+
+                    <x-responsive-nav-link :href="route('jobs')">
+                            {{ __('All jobs')}}
+                    </x-responsive-nav-link>  
+                        
+                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
@@ -122,3 +242,5 @@
         @endauth
     </div>
 </nav>
+
+

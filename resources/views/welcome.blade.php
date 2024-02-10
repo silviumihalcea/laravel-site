@@ -5,9 +5,10 @@
         </h2>
     </x-slot>
 
-
+    <div class="mt-4 flex justify-between">
+    @include('filters')
     @include('alljobs')        
     
-
+    </div>
         
 </x-app-layout>

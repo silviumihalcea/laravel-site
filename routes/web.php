@@ -11,6 +11,7 @@ use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WorkPreferenceController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\CartController;
 
 
 /*
@@ -23,6 +24,13 @@ use App\Http\Controllers\WelcomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,13 +49,6 @@ Route::middleware('auth')->group(function () {
 Route::get('admin_jobs', function () {
     return view('admin_jobs');
 })->name('admin_jobs');
-
-Route::get('/button1', function () {
-    return view('button1');
-})->name('button1');
-
-
-Route::post('example', [ExampleController::class, 'store'])->name('example');
 
 
 // benefits route
@@ -82,8 +83,24 @@ Route::post('work_preferences', [WorkPreferenceController::class, 'store'])->nam
 // welcome route
 Route::get('/', [WelcomeController::class, 'showWelcome']);
 
+//candidates route
+Route::get('candidates', [CartController::class, 'get_candidates'])->middleware(['auth', 'verified'])->name('candidates');
 
 
+//filters route
+Route::post('filters', [JobController::class, 'filters'])->name('filters');
+
+//applied jobs route
+
+Route::get('/dashboard/{jobId}', [CartController::class, 'store'])->middleware(['auth', 'verified']);
+Route::get('/dashboard', [CartController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
+
+//delete job
+Route::get('/delete-job/{id}', [JobController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+//jobdetails route
+
+Route::get('{tag}', [JobController::class, 'showJob'])->name('tag');
 
 
 require __DIR__.'/auth.php';

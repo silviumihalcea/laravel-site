@@ -7,9 +7,9 @@
 
     <div class="mx-auto w-4/5">
         <div>  
+            <!-- add benefit form -->
             <form method="POST" action="{{ route('benefit') }}">
                 @csrf
-
                 <!-- Name -->
                 <div>
                     <x-input-label for="name" :value="__('Name')" />
@@ -17,9 +17,7 @@
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
 
-                
-                <div class="flex items-center justify-end mt-4">
-                    
+                <div class="flex items-center justify-end mt-4"> 
                     <x-primary-button class="ms-4">
                         {{ __('Add benefit') }}
                     </x-primary-button>
@@ -27,6 +25,7 @@
             </form>
         </div>
        
+        <!-- get all benefits -->
         <div class="mt-4 text-gray-800">
             <p class="text-lg text-white font-semibold mb-4">All Benefits</p>
 
@@ -49,10 +48,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-
-        
+        </div>  
     </div>
-
 </x-app-layout>

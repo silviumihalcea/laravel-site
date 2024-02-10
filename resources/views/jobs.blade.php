@@ -5,8 +5,15 @@
         </h2>
     </x-slot>
 
+    @if(session('delete'))
+    <div class="bg-red-500 bg-opacity-30 rounded-lg flex justify-center py-4 text-white text-base font-bold" role="alert">
+        Job deleted!
+    </div>
+    @endif
+    
     @include('addjob')
-    @include('alljobs')        
+    @include('alljobs')
+      
     
 
         
